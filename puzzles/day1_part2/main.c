@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#include <aoc23/aoc23.h>
+
 const char* const digits_as_words[] = {
     "one",
     "two",
@@ -43,12 +45,7 @@ static inline int get_digit_from_back(const char *line) {
 }
 
 int main(void) {
-    FILE *file;
-    file = fopen("puzzle_input.txt", "r");
-    if (file == NULL) {
-        perror("File failed to open\n");
-        exit(1);
-    }
+    FILE *file = aoc_io_open_file("puzzle_input.txt", "r");
 
     char buffer[255];
     int result = 0;
