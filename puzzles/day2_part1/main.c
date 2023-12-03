@@ -21,7 +21,7 @@ int parse_game_id(const char* buffer, int* game_id) {
 void update_max_counts(const char* token, int* red_max, int* green_max, int* blue_max) {
     char color[6];
     int count;
-    if (sscanf(token, "%d %s", &count, color) == 2) {
+    if (sscanf(token, "%d %5s", &count, color) == 2) {
         if (strcmp(color, "red") == 0) {
             *red_max = MAX(*red_max, count);
         } else if (strcmp(color, "green") == 0) {
@@ -57,17 +57,9 @@ CubeSet process_game(const char* buffer) {
 
 int main(void) {
     FILE* file = aoc_io_open_file("puzzle_input.txt", "r");
-
-    if (!file) {
-        fprintf(stderr, "Error opening file\n");
-        return 1;
-    }
-
     char buffer[255];
     int result = 0;
-
     while (fgets(buffer, sizeof(buffer), file)) {
-        // parse out the Game ID
         int game_id;
         if (parse_game_id(buffer, &game_id) != 1) {
             fprintf(stderr, "Error parsing Game ID\n");
@@ -76,8 +68,9 @@ int main(void) {
         }
 
         CubeSet color_counts = process_game(buffer);
-        if (color_counts.blue > MAX_BLUE || color_counts.red > MAX_RED || color_counts.green > MAX_GREEN)
+        if (color_counts.blue > MAX_BLUE || color_counts.red > MAX_RED || color_counts.green > MAX_GREEN) {
             continue;
+        }
 
         result += game_id;
     }
