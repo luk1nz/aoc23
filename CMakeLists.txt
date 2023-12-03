@@ -38,4 +38,6 @@ target_link_libraries(aoc23
 
 add_subdirectory(puzzles/day1_part1)
 add_subdirectory(puzzles/day1_part2)
+add_subdirectory(puzzles/day2_part1)
+add_subdirectory(puzzles/day2_part2)
 
